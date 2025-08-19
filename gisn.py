@@ -1,6 +1,6 @@
 """
 GLOBAL INTELLIGENCE SYNTHESIS NETWORK
-v0.9.0  –  validated 1 M-agent coordination
+v0.9.0    validated 1 M-agent coordination
 """
 import numpy as np
 from dataclasses import dataclass
@@ -94,6 +94,25 @@ class UniversalIntelligenceSynthesis:
         )
 
     def synthesize_decision(self, decision: Decision) -> Dict[str, Any]:
+        """
+        Synthesizes a decision using domain analyses and returns a structured dictionary.
+
+        Returns:
+            Dict[str, Any]: {
+                "decision_synthesis": {
+                    "recommended_option": str,
+                    "option_scores": Dict[str, float],
+                    "synthesis_confidence": float
+                },
+                "coordination_protocol": {
+                    "implementation_phases": List[Dict[str, str]]
+                },
+                "confidence_metrics": {
+                    "average_confidence": float,
+                    "synthesis_reliability": float
+                }
+            }
+        """
         domain_analyses = {dom: self.analyze_domain(decision, dom) for dom in Domain}
         weights = self._calculate_context_weights(decision)
         synthesis = self._perform_synthesis(domain_analyses, weights)
@@ -149,14 +168,29 @@ class GlobalCoordinationNetwork:
     def __init__(self):
         self.intelligence_engine = UniversalIntelligenceSynthesis()
 
-    def submit_decision(self, context, stakeholders, options, impact_scale="personal"):
+    def submit_decision(self, context, stakeholders, options, constraints=None, impact_scale="personal", uncertainty_level=0.3):
+        """
+        Submit a decision for synthesis.
+
+        :param context: Decision context
+        :param stakeholders: List of stakeholders
+        :param options: List of options
+        :param constraints: Constraints dictionary (default: empty dict)
+        :param impact_scale: Impact scale (default: "personal")
+        :param uncertainty_level: Estimated uncertainty level for the decision (default: 0.3).
+                                 Set based on typical decision ambiguity; adjust as needed for context.
+        :return: A dictionary containing decision synthesis, coordination protocol, and confidence metrics.
+        """
+        if constraints is None:
+            constraints = {}
         decision = Decision(
             context=context,
             stakeholders=stakeholders,
             options=options,
-            constraints={},
+            constraints=constraints,
             timeframe=30,
             impact_scale=impact_scale,
-            uncertainty_level=0.3,
+            uncertainty_level=uncertainty_level,
         )
+        return self.intelligence_engine.synthesize_decision(decision)
         return self.intelligence_engine.synthesize_decision(decision)
