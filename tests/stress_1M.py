@@ -4,7 +4,7 @@ Reproduce the 1 000-instance / 1 M-agent public-goods benchmark
 Run:  python tests/stress_1M.py
 """
 import random, time, os, psutil
-from ..gisn import GlobalCoordinationNetwork, Decision
+from gisn import GlobalCoordinationNetwork, Decision
 
 N_INSTANCES = 1_000
 PLAYERS_PER_INSTANCE = 1_000
