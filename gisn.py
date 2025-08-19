@@ -169,18 +169,6 @@ class GlobalCoordinationNetwork:
         self.intelligence_engine = UniversalIntelligenceSynthesis()
 
     def submit_decision(self, context, stakeholders, options, constraints=None, impact_scale="personal", uncertainty_level=0.3):
-        """
-        Submit a decision for synthesis.
-
-        :param context: Decision context
-        :param stakeholders: List of stakeholders
-        :param options: List of options
-        :param constraints: Constraints dictionary (default: empty dict)
-        :param impact_scale: Impact scale (default: "personal")
-        :param uncertainty_level: Estimated uncertainty level for the decision (default: 0.3).
-                                 Set based on typical decision ambiguity; adjust as needed for context.
-        :return: A dictionary containing decision synthesis, coordination protocol, and confidence metrics.
-        """
         if constraints is None:
             constraints = {}
         decision = Decision(
