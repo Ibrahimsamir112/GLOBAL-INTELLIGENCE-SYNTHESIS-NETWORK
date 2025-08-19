@@ -4,6 +4,8 @@ Reproduce the 1 000-instance / 1 M-agent public-goods benchmark
 Run:  python tests/stress_1M.py
 """
 import random, time, os, psutil
+import sys
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from gisn import GlobalCoordinationNetwork, Decision
 
 N_INSTANCES = 1_000
